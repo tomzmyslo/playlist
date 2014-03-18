@@ -1,21 +1,39 @@
-<%= form_tag results_index_path, :method => 'get' do %>
-	<%= text_field_tag :search, params[:search] %>
-	<%= submit_tag "Search", :name => nil %>
-<% end %>
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<%= link_to "Playlist", root_url, class: "navbar-brand" %>
+			<%= form_tag results_index_path, :method => 'get', role: "search", class: "navbar-form navbar-left" do %>
+				<div class="form-group">
+					<%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search a Song" %>
+				</div>
+				<%= submit_tag "Search", :name => nil, class: "btn btn-default" %>
+				<%= link_to "Reset", root_url, class: "btn btn-default" %>
+			<% end %>
+		</div>
+	</div>
+</nav>
 
-<table>
-	<tr>
-		<th>Artwork</th>
-		<th>Artist</th>
-		<th>Track</th>
-		<th>Price</th>
-	</tr>
-	<% @songs.each do |song| %>
+<table class="table table-bordered">
+	<thead>
 		<tr>
-			<td><%= image_tag song.artworkUrl60 %></td>
-			<td><%= song.artistName %></td>
-			<td><%= song.trackName %></td>
-			<td><%= number_to_currency song.trackPrice %></td>
+			<th>Artwork</th>
+			<th>Artist</th>
+			<th>Track</th>
+			<th>Album</th>
+			<th>Price</th>
 		</tr>
-	<% end %>
+	</thead>
+	<tbody>
+		<% @songs.each do |song| %>
+			<tr>
+				<td><%= image_tag song.artworkUrl60 %></td>
+				<td><h4><%= song.artistName %></h4></td>
+				<td><h4><%= song.trackName %></h4></td>
+				<td><h4><%= song.collectionName %></h4></td>
+				<td>
+					<%= link_to (number_to_currency song.trackPrice), song.trackViewUrl, class: "label label-success" %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>

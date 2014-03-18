@@ -1,5 +1,5 @@
 class ResultsController < ApplicationController
   def index
-    @songs = Nashville::Music::Song.search(song: params[:search])
+    @songs = Nashville::Music.search(song: params[:search], limit: 10)
   end
 end

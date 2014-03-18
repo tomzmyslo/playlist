@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Custom Gems
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'nashville'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
