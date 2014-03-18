@@ -1,2 +1,21 @@
-<h1>Results#index</h1>
-<p>Find me in app/views/results/index.html.erb</p>
+<%= form_tag results_index_path, :method => 'get' do %>
+	<%= text_field_tag :search, params[:search] %>
+	<%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<table>
+	<tr>
+		<th>Artwork</th>
+		<th>Artist</th>
+		<th>Track</th>
+		<th>Price</th>
+	</tr>
+	<% @songs.each do |song| %>
+		<tr>
+			<td><%= image_tag song.artworkUrl60 %></td>
+			<td><%= song.artistName %></td>
+			<td><%= song.trackName %></td>
+			<td><%= number_to_currency song.trackPrice %></td>
+		</tr>
+	<% end %>
+</table>
